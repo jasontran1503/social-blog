@@ -1,0 +1,19 @@
+<h1 class="title">{{ post.title }}</h1>
+<div class="d-flex justify-content-between">
+    <div class="d-flex flex-column">
+        <div class="author d-flex">
+            <img class="avatar" [src]="post.user.avatar">
+            <div class="author-info ml-2">
+                <span [routerLink]="['/', 'user', post.user.username]">{{ post.user.username }}</span>
+            </div>
+        </div>
+        <small class="post-date">{{ formatDate(post?.createdAt) }}</small>
+    </div>
+    <div class="mt-1 ml-3" *ngIf="isDisplay">
+        <button class="btn-color mr-3 mb-1" [routerLink]="['/', 'post', 'update', post.slug]">Sửa</button>
+        <button class="btn-delete" (click)="delete(post.slug)">Xóa</button>
+    </div>
+</div>
+<div class="mt-4">
+    <p [innerHTML]="post?.content"></p>
+</div>

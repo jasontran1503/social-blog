@@ -1,0 +1,20 @@
+<div class="mb-5 d-flex flex-column profile">
+    <img class="avatar" [src]="user.avatar">
+    <div class="image-upload">
+        <i class="fa fa-camera" (click)="fileInput.click()"></i>
+        <input type="file" accept="image/*" (change)="onUpload($event)" #fileInput />
+    </div>
+    <h2 class="text-center text-break bold">{{ user.username }}</h2>
+    <app-follow-button class="text-center" [user]="user">
+    </app-follow-button>
+    <div class="d-flex justify-content-around pt-4 pb-2">
+        <div class="d-flex">
+            <i class="fa fa-birthday-cake mr-2 pl-1"></i>
+            <small class="text-break">Tham gia vào: {{ formatDate(user.createdAt) }}</small>
+        </div>
+        <div class="d-flex">
+            <i class="fa fa-envelope mr-2 pl-1"></i>
+            <small class="text-break">Email: {{ user.email }}</small>
+        </div>
+    </div>
+</div>

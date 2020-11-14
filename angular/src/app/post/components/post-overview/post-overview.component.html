@@ -1,0 +1,29 @@
+<div class="d-flex flex-column post-overview bg-white" *ngFor="let post of posts">
+    <!-- author -->
+    <div class="author d-flex">
+        <img class="avatar" [src]="post.user.avatar">
+        <div class="author-info ml-1">
+            <span [routerLink]="['/', 'user', post.user.username]">{{ post.user.username }}</span>
+        </div>
+    </div>
+    <small class="post-date">{{ formatDate(post.createdAt) }}</small>
+
+    <!-- title -->
+    <div class="post-title text-center d-flex justify-content-center mt-2">
+        <div class="w-80">
+            <h2 [routerLink]="['/', 'post', 'detail', post.slug]">{{ post.title }}</h2>
+        </div>
+    </div>
+
+    <!-- likes & comments detail -->
+    <div class="d-flex justify-content-around my-3">
+        <app-favorite-button [post]="post"></app-favorite-button>
+        <div class="mt-1">
+            <i class="fa fa-comment-o"></i>
+            <small class="ml-2 mr-1">{{ post.comments.length }}</small>
+            <small>bình luận</small>
+        </div>
+    </div>
+</div>
+
+<p *ngIf="posts?.length === 0">Không có dữ liệu</p>

@@ -1,0 +1,5 @@
+<app-post-overview [posts]="posts"></app-post-overview>
+<div *ngIf="posts?.length > 0">
+    <app-pagination [postsCount]="postsCount" [currentPage]="page" (choosePage)="choosePage($event)"
+        (changePage)="changePage($event)"></app-pagination>
+</div>

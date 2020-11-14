@@ -1,0 +1,30 @@
+<ng-container *ngIf="user$ | async as user">
+    <app-user-profile [user]="user.data" (uploadAvatar)="uploadAvatar($event)"></app-user-profile>
+</ng-container>
+<div class="user-info">
+    <span class="item" [class.active]="userRouteNumber === 1" (click)="changeUserRoute(1)">Bài viết</span>
+    <span class="item" [class.active]="userRouteNumber === 2" (click)="changeUserRoute(2)">Người theo dõi</span>
+    <span class="item" [class.active]="userRouteNumber === 3" (click)="changeUserRoute(3)">Đang theo dõi</span>
+</div>
+<!-- Post -->
+<div *ngIf="userRouteNumber === 1">
+    <ng-container *ngIf="post$ | async as post">
+        <app-user-posts [posts]="post.data.posts"></app-user-posts>
+        <div *ngIf="post.data.postsCount > 0">
+            <app-pagination [postsCount]="post.data.postsCount" [currentPage]="page" (choosePage)="choosePage($event)"
+                (changePage)="changePage($event)"></app-pagination>
+        </div>
+    </ng-container>
+</div>
+<!-- Followers -->
+<div *ngIf="userRouteNumber === 2">
+    <ng-container *ngIf="listFollowers$ | async as user">
+        <app-users-helper [listUser]="user.data"></app-users-helper>
+    </ng-container>
+</div>
+<!-- Following -->
+<div *ngIf="userRouteNumber === 3">
+    <ng-container *ngIf="listFollowing$ | async as user">
+        <app-users-helper [listUser]="user.data"></app-users-helper>
+    </ng-container>
+</div>

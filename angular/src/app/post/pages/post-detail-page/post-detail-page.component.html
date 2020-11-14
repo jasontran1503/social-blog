@@ -1,0 +1,11 @@
+<ng-container *ngIf="post$ | async as post">
+    <app-post-content [post]="post.data" [currentUsername]="currentUsername" (deletePost)="deletePost($event)">
+    </app-post-content>
+
+    <app-favorite-button [post]="post.data"><span class="ml-2">Thích</span>
+    </app-favorite-button>
+
+    <app-comment [comments]="post.data.comments" [currentUsername]="currentUsername"
+        (createComment)="createComment($event)" (showEditComment)="showEditComment($event)"
+        (deleteComment)="deleteComment($event)"></app-comment>
+</ng-container>

@@ -1,0 +1,32 @@
+.btn-favorite {
+    font-weight: bolder;
+    color: #4169e1;
+    line-height: 30px;
+    padding: 0 15px 0 15px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 2px solid #4169e1;
+    outline: none !important;
+    width: auto;
+    background-color: white;
+}
+
+.favorited {
+    background-color: #4169e1;
+    color: white;
+    cursor: pointer;
+}
+
+.list-favorite:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+.list-favorite .fa-thumbs-up {
+    color: #4169e1;
+}
+
+.modal-body {
+    max-height: 500px;
+    overflow-y: auto;
+}

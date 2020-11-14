@@ -1,0 +1,36 @@
+.profile {
+    width: 70%;
+    height: auto;
+    margin: 0 auto;
+    border-top: 5px solid #4169e1;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .24);
+}
+
+.avatar {
+    height: 80px;
+    width: 80px;
+    border-radius: 50%;
+    margin: 5px auto;
+    border: 2px solid #4169e1;
+}
+
+.image-upload {
+    margin: -25px auto 0 auto;
+}
+
+.image-upload>input {
+    display: none;
+}
+
+.image-upload i {
+    width: 80px;
+    cursor: pointer;
+}
+
+.fa {
+    color: #4169e1;
+}
+
+.fa-camera {
+    color: black;
+}

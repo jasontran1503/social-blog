@@ -1,0 +1,31 @@
+.title {
+  font-weight: bold;
+  font-size: 55px;
+  font-style: italic;
+}
+
+.avatar {
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #4169e1;
+}
+
+.btn-delete {
+  font-weight: bolder;
+  color: #e92f22;
+  line-height: 30px;
+  padding: 0 15px 0 15px;
+  font-size: 14px;
+  border-radius: 5px;
+  border: 2px solid #e92f22;
+  outline: none !important;
+  width: auto;
+  background-color: white;
+}
+
+.btn-delete:hover {
+  background-color: #e92f22;
+  color: white;
+  cursor: pointer;
+}

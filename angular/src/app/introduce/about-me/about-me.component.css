@@ -1,0 +1,62 @@
+.img-friend {
+    max-width: 35%;
+    height: auto;
+    border-radius: 10px;
+    margin: 0 5px;
+}
+
+.text-color {
+    color: #4169e1;
+    font-weight: bold;
+}
+
+.interests-list {
+    width: 100%;
+    height: auto;
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.24);
+}
+
+.interests-item {
+    color: #4169e1;
+    border: 2px solid #4169e1;
+    box-shadow: 0 1px 6px rgba(0,0,0,.12), 0 1px 4px rgba(0,0,0,.24);
+    padding: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 10px;
+    position: relative;
+    display: inline-block;
+    transition: 0.5s all ease-in-out;
+}
+
+.tooltiptext {
+    visibility: hidden;
+    width: 100px;
+    background-color: #4169e1;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    position: absolute;
+    z-index: 1;
+    margin-top: 35px;
+    font-size: 12px;
+    left: 50%;
+    margin-left: -60px;
+}
+
+.interests-item:hover .tooltiptext {
+    visibility: visible;
+}
+
+@media only screen and (max-width: 768px) {
+    .img-friend {
+        max-width: 32%;
+    }
+    .margin-bottom {
+        margin-bottom: 100px;
+    }
+}

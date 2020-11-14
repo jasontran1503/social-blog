@@ -1,0 +1,15 @@
+.comment-form textarea {
+  width: 100%;
+  border-radius: 5px;
+  height: 60px;
+}
+
+.modal-title {
+  font-weight: bold;
+  color: #4169e1;
+}
+
+.modal-body .close {
+  outline: none;
+  margin-bottom: 20px;
+}
