@@ -6,6 +6,10 @@
     box-shadow: 0 1px 6px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .24);
 }
 
+.modal-header .close {
+    outline: none;
+}
+
 .avatar {
     height: 80px;
     width: 80px;

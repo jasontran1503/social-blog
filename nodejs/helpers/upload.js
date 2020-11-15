@@ -7,12 +7,23 @@ const fileFilter = function (req, file, cb) {
   cb(null, true);
 };
 
-const uploader = multer({
-  storage: multer.memoryStorage(),
-  fileFilter,
-  limits: {
-    fileSize: 1 * 1024 * 1024, // limiting files size to 1 MB
+// const uploader = multer({
+//   storage: multer.memoryStorage(),
+//   fileFilter,
+//   limits: {
+//     fileSize: 1 * 1024 * 1024, // limiting files size to 1 MB
+//   },
+// });
+
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads')
   },
-});
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+
+const uploader = multer({ storage: storage });
 
 module.exports = uploader;

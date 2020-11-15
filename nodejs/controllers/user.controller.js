@@ -191,31 +191,36 @@ module.exports = {
             if (!req.file) {
                 throw new Error('Không có ảnh được chọn');
             }
-            const blob = bucket.file(Date.now() + '-' + req.file.originalname);
-            const avatarUrl = await blob.getSignedUrl({
-                action: 'read',
-                expires: '03-09-2491'
+            return res.status(200).json({
+                success: true,
+                message: 'Thành công',
+                data: req.file
             });
-            const blobWriter = blob.createWriteStream({
-                metadata: {
-                    contentType: req.file.mimetype,
-                    metadata: {
-                        firebaseStorageDownloadTokens: uuidv4()
-                    }
-                }
-            });
+            // const blob = bucket.file(Date.now() + '-' + req.file.originalname);
+            // const avatarUrl = await blob.getSignedUrl({
+            //     action: 'read',
+            //     expires: '03-09-2491'
+            // });
+            // const blobWriter = blob.createWriteStream({
+            //     metadata: {
+            //         contentType: req.file.mimetype,
+            //         metadata: {
+            //             firebaseStorageDownloadTokens: uuidv4()
+            //         }
+            //     }
+            // });
 
-            blobWriter.on('error', (err) => next(err));
+            // blobWriter.on('error', (err) => next(err));
 
-            blobWriter.on('finish', async () => {
-                await currentUser.updateOne({ avatar: avatarUrl[0] });
-                return res.status(200).json({
-                    success: true,
-                    message: 'Thành công',
-                    data: avatarUrl[0]
-                });
-            });
-            blobWriter.end(req.file.buffer);
+            // blobWriter.on('finish', async () => {
+            //     await currentUser.updateOne({ avatar: avatarUrl[0] });
+            //     return res.status(200).json({
+            //         success: true,
+            //         message: 'Thành công',
+            //         data: avatarUrl[0]
+            //     });
+            // });
+            // blobWriter.end(req.file.buffer);
         } catch (error) {
             next(error);
         }

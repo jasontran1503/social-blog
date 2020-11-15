@@ -24,7 +24,9 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors({
-    origin: true,
+    origin: 'http://localhost:4200',
+    allowedHeaders: 'Origin, X-Requested-With, X-Api-Key, Content-Type, Accept, Authorization',
+    methods: 'GET, POST, PUT, DELETE',
     credentials: true
 }));
 
