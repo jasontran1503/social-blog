@@ -17,8 +17,7 @@ export class AuthInterceptor implements HttpInterceptor {
     request = request.clone({
       withCredentials: true,
       setHeaders: {
-        Authorization: `${this.authService.getToken()}`,
-        'Content-Type': 'application/json'
+        Authorization: `${this.authService.getToken()}`
       }
     });
     return next.handle(request);

@@ -28,8 +28,7 @@
     <div class="modal-body d-flex flex-column">
         <img class="avatar" [src]="avatarUrl" *ngIf="avatarUrl">
         <input class="d-none" type="file" accept="image/*" (change)="selectedAvatar($event)" #fileInput />
-        <button class="btn-color w-50 m-auto" (click)="fileInput.click()">
-            <i class="fa fa-plus mr-1"></i>Tải ảnh lên</button>
+        <button class="btn-color w-50 m-auto" (click)="fileInput.click()">Tải ảnh lên</button>
     </div>
     <div class="modal-footer p-1" *ngIf="avatarUrl">
         <button type="button" class="btn-color" (click)="upload()">

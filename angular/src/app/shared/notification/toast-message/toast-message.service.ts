@@ -18,12 +18,13 @@ export class ToastMessageService {
             color
         };
         this.modalRef = this.modalService.show(ToastMessageComponent, {
+            id: 1,
             class: 'modal-dialog modal-sm',
             ignoreBackdropClick: true,
             initialState
         });
         setTimeout(() => {
-            this.modalRef.hide();
+            this.modalService.hide(1);
         }, 1500);
     }
 

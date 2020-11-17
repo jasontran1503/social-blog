@@ -26,7 +26,8 @@ export class UserProfileComponent implements OnInit {
   constructor(
     private toast: ToastMessageService,
     private authService: AuthService,
-    private modalService: BsModalService) { }
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
     this.authService.currentUser
@@ -55,7 +56,9 @@ export class UserProfileComponent implements OnInit {
    * Open modal upload
    */
   showUploadModal() {
-    this.modalRef = this.modalService.show(this.uploadModal);
+    this.modalRef = this.modalService.show(this.uploadModal, {
+      class: 'modal-dialog modal-dialog-centered',
+    });
   }
 
   /**

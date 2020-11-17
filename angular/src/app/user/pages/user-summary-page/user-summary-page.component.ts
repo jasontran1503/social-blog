@@ -73,7 +73,10 @@ export class UserSummaryPageComponent implements OnInit, OnDestroy {
     this.userService.uploadAvatar(avatar)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
-        console.log(response);
+        if (response && response.data) {
+          this.getUserProfile(this.username);
+          this.getPostByUser(this.username, this.page);
+        }
       });
   }
 
