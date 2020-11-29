@@ -78,7 +78,7 @@ export class UserService {
   uploadAvatar(avatar: File) {
     const formData = new FormData();
     formData.append('avatar', avatar, avatar.name);
-    return this.http.post<DataResponse>(`${url}${userUrl}/upload`, formData);
+    return this.http.post<DataResponse>(`${url}${userUrl}/upload-to-cloud`, formData);
   }
 
 }

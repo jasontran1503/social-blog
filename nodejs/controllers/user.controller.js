@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const { Storage } = require('@google-cloud/storage');
 const { v4: uuidv4 } = require('uuid');
+const cloudinary = require('cloudinary').v2;
+const fs = require('fs');
 
 module.exports = {
     /**
@@ -219,5 +221,38 @@ module.exports = {
         } catch (error) {
             next(error);
         }
+    },
+
+    /**
+     * Upload image to cloud
+     * @route POST api/user/upload-to-cloud
+     * @formData avatar
+     */
+    uploadImageToCloudinary: async (req, res, next) => {
+        cloudinary.config({
+            cloud_name: process.env.CLOUD_NAME,
+            api_key: process.env.CLOUD_API_KEY,
+            api_secret: process.env.CLOUD_API_SECRET
+        });
+        const currentUser = await User.findById(req.user._id);
+        try {
+            if (!currentUser) {
+                throw new Error('Không tìm thấy user');
+            }
+            if (!req.file) {
+                throw new Error('Không có ảnh được chọn');
+            }
+            const uploadResult = await cloudinary.uploader.upload(req.file.path, { folder: 'images' });
+            fs.unlinkSync(req.file.path);
+            await currentUser.updateOne({ avatar: uploadResult.url });
+            return res.status(200).json({
+                success: true,
+                message: 'Upload thành công!',
+                data: uploadResult.url
+            });
+        } catch (error) {
+            next(error);
+        }
+
     }
 };
