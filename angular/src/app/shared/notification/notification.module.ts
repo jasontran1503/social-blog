@@ -5,10 +5,12 @@ import { MessageDialogComponent } from './dialogs/message-dialog/message-dialog.
 import { ConfirmDialogComponent } from './dialogs/confirm-dialog/confirm-dialog.component';
 
 @NgModule({
-  declarations: [ToastMessageComponent, ConfirmDialogComponent, MessageDialogComponent],
-  imports: [
-    CommonModule
+  declarations: [
+    ToastMessageComponent,
+    ConfirmDialogComponent,
+    MessageDialogComponent,
   ],
-  exports: [ToastMessageComponent, ConfirmDialogComponent]
+  imports: [CommonModule],
+  exports: [ToastMessageComponent, ConfirmDialogComponent],
 })
 export class NotificationModule { }

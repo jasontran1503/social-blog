@@ -1,32 +1,39 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <div class="comment-form">
-        <textarea placeholder="Viết bình luận..." formControlName="content"></textarea>
-    </div>
-    <div class="text-error" *ngIf="(submitted || f.content.touched) && f.content.errors">
-        <small *ngIf="f.content.errors?.required">
-            Bạn chưa nhập nội dung</small>
-    </div>
-    <button type="submit" class="btn-color float-right mb-3">Bình luận</button>
+  <div class="comment-form">
+    <textarea
+      placeholder="Viết bình luận..."
+      formControlName="content"
+    ></textarea>
+  </div>
+  <div
+    class="text-error"
+    *ngIf="(submitted || f.content.touched) && f.content.errors"
+  >
+    <small *ngIf="f.content.errors?.required"> Bạn chưa nhập nội dung</small>
+  </div>
+  <button type="submit" class="btn-color float-right mb-3">Bình luận</button>
 </form>
 
 <div class="comments mt-4 d-flex flex-column" *ngFor="let comment of comments">
-    <div class="mt-2 border-bottom">
-        <p class="text-break ml-2">{{ comment.content }}</p>
+  <div class="mt-2 border-bottom">
+    <p class="text-break ml-2">{{ comment.content }}</p>
+  </div>
+  <div class="d-flex justify-content-between mb-1">
+    <div class="author d-flex">
+      <img class="avatar" [src]="comment.user.avatar" />
+      <div class="author-info ml-1 mt-1">
+        <span [routerLink]="['/', 'user', comment.user.username]">{{
+          comment.user.username
+        }}</span>
+      </div>
     </div>
-    <div class="d-flex justify-content-between mb-1">
-        <div class="author d-flex">
-            <img class="avatar" [src]="comment.user.avatar">
-            <div class="author-info ml-1 mt-1">
-                <span [routerLink]="['/', 'user', comment.user.username]">{{ comment.user.username }}</span>
-            </div>
-        </div>
-        <div class="d-flex align-items-center mr-4" *ngIf="isDisplay">
-            <div class="comment-icon edit mr-2">
-                <i class="fa fa-pencil" (click)="editComment(comment)"></i>
-            </div>
-            <div class="comment-icon delete">
-                <i class="fa fa-trash" (click)="onDeleteComment(comment._id)"></i>
-            </div>
-        </div>
+    <div class="d-flex align-items-center mr-4" *ngIf="isDisplay">
+      <div class="comment-icon edit mr-2">
+        <i class="fa fa-pencil" (click)="editComment(comment)"></i>
+      </div>
+      <div class="comment-icon delete">
+        <i class="fa fa-trash" (click)="onDeleteComment(comment._id)"></i>
+      </div>
     </div>
+  </div>
 </div>

@@ -8,6 +8,7 @@ import { PaginationComponent } from './pagination/pagination.component';
 import { FollowButtonComponent } from './follow-button/follow-button.component';
 import { FavoriteButtonComponent } from './favorite-button/favorite-button.component';
 import { UsersHelperComponent } from './users-helper/users-helper.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,19 +17,16 @@ import { UsersHelperComponent } from './users-helper/users-helper.component';
     PaginationComponent,
     FollowButtonComponent,
     FavoriteButtonComponent,
-    UsersHelperComponent
+    UsersHelperComponent,
   ],
-  imports: [
-    CommonModule,
-    RouterModule
-  ],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule],
   exports: [
     HeaderComponent,
     Page404Component,
     PaginationComponent,
     FollowButtonComponent,
     FavoriteButtonComponent,
-    UsersHelperComponent
-  ]
+    UsersHelperComponent,
+  ],
 })
 export class LayoutModule { }

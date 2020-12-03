@@ -1,16 +1,27 @@
-<button class="btn-favorite mb-2" (click)="toggleFavorite()" [ngClass]="isFavorite ? 'favorited' : ''">
-    <i class="fa" [ngClass]="isFavorite ? 'fa-thumbs-up' : 'fa-thumbs-o-up'"></i>
-    <ng-content></ng-content>
+<button
+  class="btn-favorite mb-2"
+  (click)="toggleFavorite()"
+  [ngClass]="isFavorite ? 'favorited' : ''"
+>
+  <i class="fa" [ngClass]="isFavorite ? 'fa-thumbs-up' : 'fa-thumbs-o-up'"></i>
+  <ng-content></ng-content>
 </button>
-<small class="ml-2 list-favorite" *ngIf="favoritesCount > 0" (click)="showListFavorite()">
-    <i class="fa fa-thumbs-up"></i>
-    {{ favoritesCount }} lượt thích
+<small
+  class="ml-2 list-favorite"
+  *ngIf="favoritesCount > 0"
+  (click)="showListFavorite()"
+>
+  <i class="fa fa-thumbs-up"></i>
+  {{ favoritesCount }} lượt thích
 </small>
 
 <ng-template #templateListFavorite>
-    <div class="modal-body">
-        <ng-container *ngIf="listFavorite$ | async as listUser">
-            <app-users-helper [listUser]="listUser.data" (closeModal)="modalRef.hide()"></app-users-helper>
-        </ng-container>
-    </div>
+  <div class="modal-body">
+    <ng-container *ngIf="listFavorite$ | async as listUser">
+      <app-users-helper
+        [listUser]="listUser.data"
+        (closeModal)="modalRef.hide()"
+      ></app-users-helper>
+    </ng-container>
+  </div>
 </ng-template>

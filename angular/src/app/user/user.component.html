@@ -1,15 +1,15 @@
 <div class="row">
-    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-2"></div>
-    <div class="col-sm-10 col-md-10 col-lg-10 col-xl-8">
-        <div class="d-flex justify-content-end mt-3">
-            <!-- <div class="btn btn-dark mr-3" routerLink="/user">Edit Profile</div> -->
-            <div class="btn-color" [routerLink]="['/', 'post', 'create']">
-                Bài viết mới
-            </div>
-        </div>
-        <div class="m-5">
-            <router-outlet></router-outlet>
-        </div>
+  <div class="col-sm-1 col-md-1 col-lg-1 col-xl-2"></div>
+  <div class="col-sm-10 col-md-10 col-lg-10 col-xl-8">
+    <div class="d-flex justify-content-end mt-3">
+      <!-- <div class="btn btn-dark mr-3" routerLink="/user">Edit Profile</div> -->
+      <div class="btn-color" [routerLink]="['/', 'post', 'create']">
+        Bài viết mới
+      </div>
     </div>
-    <div class="col-sm-1 col-md-1 col-lg-1 col-xl-2"></div>
+    <div class="m-5">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+  <div class="col-sm-1 col-md-1 col-lg-1 col-xl-2"></div>
 </div>

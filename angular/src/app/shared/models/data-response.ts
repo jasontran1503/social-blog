@@ -1,5 +1,5 @@
 export interface DataResponse {
-    success: boolean;
-    message: string;
-    data?: any;
+  success: boolean;
+  message: string;
+  data?: any;
 }

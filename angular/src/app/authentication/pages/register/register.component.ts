@@ -10,10 +10,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
 })
 export class RegisterComponent implements OnInit, OnDestroy {
-
   formGroup: FormGroup;
   submitted = false;
 
@@ -23,7 +22,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     private authService: AuthService,
     private router: Router,
-    private toast: ToastMessageService) { }
+    private toast: ToastMessageService
+  ) { }
 
   ngOnInit(): void {
     this.formGroup = this.buildForm();
@@ -33,32 +33,32 @@ export class RegisterComponent implements OnInit, OnDestroy {
    * Build form
    */
   buildForm() {
-    return this.fb.group({
-      email: ['',
-        [
-          Validators.required,
-          Validators.email
-        ]
-      ],
-      username: ['',
-        [
-          Validators.required,
-          Validators.pattern(/^[a-zA-Z0-9]*$/),
-          Validators.minLength(6),
-          Validators.maxLength(20)
-        ]
-      ],
-      password: ['',
-        [
-          Validators.required,
-          Validators.minLength(6),
-          Validators.maxLength(20)
-        ]
-      ],
-      confirmPassword: ['', Validators.required]
-    }, {
-      validator: this.mustMatch('password', 'confirmPassword')
-    });
+    return this.fb.group(
+      {
+        email: ['', [Validators.required, Validators.email]],
+        username: [
+          '',
+          [
+            Validators.required,
+            Validators.pattern(/^[a-zA-Z0-9]*$/),
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(6),
+            Validators.maxLength(20),
+          ],
+        ],
+        confirmPassword: ['', Validators.required],
+      },
+      {
+        validator: this.mustMatch('password', 'confirmPassword'),
+      }
+    );
   }
 
   get f() {
@@ -76,14 +76,15 @@ export class RegisterComponent implements OnInit, OnDestroy {
     }
     const formValue = this.formGroup.getRawValue();
     // Register
-    this.authService.register(formValue)
+    this.authService
+      .register(formValue)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: DataResponse) => {
         if (response && response.success) {
           this.toast.showToastSuccess(response.message);
           const loginValue = {
             email: formValue.email,
-            password: formValue.password
+            password: formValue.password,
           };
           // Login
           this.login(loginValue);
@@ -97,8 +98,9 @@ export class RegisterComponent implements OnInit, OnDestroy {
    * Login after register success
    * @param loginValue email & password
    */
-  login(loginValue: { email: string, password: string }) {
-    this.authService.login(loginValue)
+  login(loginValue: { email: string; password: string }) {
+    this.authService
+      .login(loginValue)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: DataResponse) => {
         if (response && response.success) {
@@ -113,8 +115,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
    * @param email email
    */
   sendMail(email: string) {
-    this.authService.sendMail(email)
-      .pipe(takeUntil(this.destroy$)).subscribe();
+    this.authService.sendMail(email).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   /**

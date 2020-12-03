@@ -1,18 +1,23 @@
 <div class="modal-body">
-    <div class="d-flex justify-content-between">
-        <h4 class="modal-title mb-2">Sửa bình luận</h4>
-        <button type="button" class="close" aria-label="Close" (click)="close()">
-            <span>&times;</span>
-        </button>
+  <div class="d-flex justify-content-between">
+    <h4 class="modal-title mb-2">Sửa bình luận</h4>
+    <button type="button" class="close" aria-label="Close" (click)="close()">
+      <span>&times;</span>
+    </button>
+  </div>
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+    <div class="comment-form">
+      <textarea
+        placeholder="Viết bình luận..."
+        formControlName="content"
+      ></textarea>
     </div>
-    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-        <div class="comment-form">
-            <textarea placeholder="Viết bình luận..." formControlName="content"></textarea>
-        </div>
-        <div class="text-error" *ngIf="(submitted || f.content.touched) && f.content.errors">
-            <small *ngIf="f.content.errors?.required">
-                Bạn chưa nhập nội dung</small>
-        </div>
-        <button type="submit" class="btn-color float-right mb-3">Lưu</button>
-    </form>
+    <div
+      class="text-error"
+      *ngIf="(submitted || f.content.touched) && f.content.errors"
+    >
+      <small *ngIf="f.content.errors?.required"> Bạn chưa nhập nội dung</small>
+    </div>
+    <button type="submit" class="btn-color float-right mb-3">Lưu</button>
+  </form>
 </div>

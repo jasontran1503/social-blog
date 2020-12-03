@@ -1,24 +1,28 @@
 .btn-white {
-    color: #212529;
-    background-color: white;
-    border: 2px solid white;
-    margin-bottom: 5px;
+  color: #212529;
+  background-color: white;
+  border: 2px solid white;
+  margin-bottom: 5px;
 }
 
 .btn-white:hover {
-    color: white;
-    background-color: #4169e1;
+  color: white;
+  background-color: #4169e1;
 }
 
 .navbar-brand {
-    padding: 0;
-    margin: 2px;
+  padding: 0;
+  margin: 2px;
 }
 
 .nav-item {
-    margin-left: 10px;
+  margin-left: 10px;
 }
 
 .bg-color {
-    background-color: #4169e1;
+  background-color: #4169e1;
+}
+
+.modal-header .close {
+  outline: none;
 }

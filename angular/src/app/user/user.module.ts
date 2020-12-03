@@ -9,25 +9,19 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { PostModule } from '../post/post.module';
 import { LayoutModule } from '../shared/layout/layout.module';
 
-
 @NgModule({
   declarations: [
     UserComponent,
     UserSummaryPageComponent,
     UserPostsComponent,
-    UserProfileComponent
+    UserProfileComponent,
   ],
-  imports: [
-    CommonModule,
-    PostModule,
-    LayoutModule,
-    UserRoutingModule
-  ],
+  imports: [CommonModule, PostModule, LayoutModule, UserRoutingModule],
   exports: [
     UserComponent,
     UserSummaryPageComponent,
     UserPostsComponent,
-    UserProfileComponent
-  ]
+    UserProfileComponent,
+  ],
 })
 export class UserModule { }

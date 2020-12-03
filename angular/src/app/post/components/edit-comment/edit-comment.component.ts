@@ -6,10 +6,9 @@ import { Comment } from 'src/app/shared/models/comment';
 @Component({
   selector: 'app-edit-comment',
   templateUrl: './edit-comment.component.html',
-  styleUrls: ['./edit-comment.component.css']
+  styleUrls: ['./edit-comment.component.css'],
 })
 export class EditCommentComponent implements OnInit {
-
   @Input() comment: Comment;
   @Output() eventEditComment = new EventEmitter();
 
@@ -28,7 +27,7 @@ export class EditCommentComponent implements OnInit {
    */
   buildForm() {
     return this.fb.group({
-      content: ['', Validators.required]
+      content: ['', Validators.required],
     });
   }
 
@@ -65,5 +64,4 @@ export class EditCommentComponent implements OnInit {
   close() {
     this.modalRef.hide();
   }
-
 }

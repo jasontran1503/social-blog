@@ -1,38 +1,53 @@
 <div class="mb-5 d-flex flex-column profile">
-    <img class="avatar" [src]="user.avatar">
-    <div class="image-upload" *ngIf="isDisplay">
-        <i class="fa fa-camera" (click)="showUploadModal()"></i>
+  <img class="avatar" [src]="user.avatar" />
+  <div class="image-upload" *ngIf="isDisplay">
+    <i class="fa fa-camera" (click)="showUploadModal()"></i>
+  </div>
+  <h2 class="text-center text-break bold">{{ user.username }}</h2>
+  <app-follow-button class="text-center" [user]="user"> </app-follow-button>
+  <div class="d-flex justify-content-around pt-4 pb-2">
+    <div class="d-flex">
+      <i class="fa fa-birthday-cake mr-2 pl-1"></i>
+      <small class="text-break"
+        >Tham gia vào: {{ formatDate(user.createdAt) }}</small
+      >
     </div>
-    <h2 class="text-center text-break bold">{{ user.username }}</h2>
-    <app-follow-button class="text-center" [user]="user">
-    </app-follow-button>
-    <div class="d-flex justify-content-around pt-4 pb-2">
-        <div class="d-flex">
-            <i class="fa fa-birthday-cake mr-2 pl-1"></i>
-            <small class="text-break">Tham gia vào: {{ formatDate(user.createdAt) }}</small>
-        </div>
-        <div class="d-flex">
-            <i class="fa fa-envelope mr-2 pl-1"></i>
-            <small class="text-break">Email: {{ user.email }}</small>
-        </div>
+    <div class="d-flex">
+      <i class="fa fa-envelope mr-2 pl-1"></i>
+      <small class="text-break">Email: {{ user.email }}</small>
     </div>
+  </div>
 </div>
 
 <ng-template #uploadModal>
-    <div class="modal-header">
-        <h5 class="modal-title bold">Cập nhật ảnh đại diện</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="close()">
-            <span>&times;</span>
-        </button>
-    </div>
-    <div class="modal-body d-flex flex-column">
-        <img class="avatar" [src]="avatarUrl" *ngIf="avatarUrl">
-        <input class="d-none" type="file" accept="image/*" (change)="selectedAvatar($event)" #fileInput />
-        <button class="btn-color w-50 m-auto" (click)="fileInput.click()">Tải ảnh lên</button>
-    </div>
-    <div class="modal-footer p-1" *ngIf="avatarUrl">
-        <button type="button" class="btn-color" (click)="upload()">
-            <span>Cập nhật</span>
-        </button>
-    </div>
+  <div class="modal-header">
+    <h5 class="modal-title bold">Cập nhật ảnh đại diện</h5>
+    <button
+      type="button"
+      class="close"
+      data-dismiss="modal"
+      aria-label="Close"
+      (click)="close()"
+    >
+      <span>&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex flex-column">
+    <img class="avatar" [src]="avatarUrl" *ngIf="avatarUrl" />
+    <input
+      class="d-none"
+      type="file"
+      accept="image/*"
+      (change)="selectedAvatar($event)"
+      #fileInput
+    />
+    <button class="btn-color w-50 m-auto" (click)="fileInput.click()">
+      Tải ảnh lên
+    </button>
+  </div>
+  <div class="modal-footer p-1" *ngIf="avatarUrl">
+    <button type="button" class="btn-color" (click)="upload()">
+      <span>Cập nhật</span>
+    </button>
+  </div>
 </ng-template>

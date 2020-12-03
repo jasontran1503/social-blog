@@ -3,10 +3,9 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'app-skills',
   templateUrl: './skills.component.html',
-  styleUrls: ['./skills.component.css']
+  styleUrls: ['./skills.component.css'],
 })
 export class SkillsComponent implements OnInit {
-
   skills: Skill[];
 
   constructor() { }
@@ -20,14 +19,12 @@ export class SkillsComponent implements OnInit {
       { name: 'ANGULAR', imgSrc: 'assets/images/skill/angular.svg' },
       { name: 'TYPESCRIPT', imgSrc: 'assets/images/skill/ts.png' },
       { name: 'NODEJS', imgSrc: 'assets/images/skill/nodejs.png' },
-      { name: 'MONGODB', imgSrc: 'assets/images/skill/mongodb.png' }
+      { name: 'MONGODB', imgSrc: 'assets/images/skill/mongodb.png' },
     ];
   }
-
 }
 
 export interface Skill {
   name: string;
   imgSrc: string;
 }
-

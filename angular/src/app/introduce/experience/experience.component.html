@@ -1,13 +1,17 @@
 <div class="text-center pd-top-40">
-    <h2 class="pb-4 bold">EXPERIENCE</h2>
+  <h2 class="pb-4 bold">EXPERIENCE</h2>
 </div>
 <div class="timeline">
-    <div class="box-exp" *ngFor="let item of experience; index as i" [ngClass]="i%2!==0 ? 'right' : 'left'">
-        <div class="content">
-            <p class="time bold">{{ item.time }}</p>
-            <p class="role bold">{{ item.role }}</p>
-            <p>Company: {{ item.companyName }}</p>
-            <p>Customer: {{ item.customer }}</p>
-        </div>
+  <div
+    class="box-exp"
+    *ngFor="let item of experience; index as i"
+    [ngClass]="i % 2 !== 0 ? 'right' : 'left'"
+  >
+    <div class="content">
+      <p class="time bold">{{ item.time }}</p>
+      <p class="role bold">{{ item.role }}</p>
+      <p>Company: {{ item.companyName }}</p>
+      <p>Customer: {{ item.customer }}</p>
     </div>
+  </div>
 </div>

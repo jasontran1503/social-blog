@@ -1,29 +1,29 @@
 .post-overview {
-    width: 100%;
-    height: auto;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    box-shadow: 0 1px 6px rgba(0, 0, 0, .12), 0 1px 4px rgba(0, 0, 0, .24);
+  width: 100%;
+  height: auto;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 6px rgba(0, 0, 0, 0.12), 0 1px 4px rgba(0, 0, 0, 0.24);
 }
 
 .avatar {
-    height: 40px;
-    width: 40px;
-    border-radius: 50%;
-    border: 2px solid #4169e1;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 2px solid #4169e1;
 }
 
 .post-title h2 {
-    font-weight: bold;
-    outline: none;
-    color: #4169e1;
+  font-weight: bold;
+  outline: none;
+  color: #4169e1;
 }
 
 .post-title h2:hover {
-    text-decoration: underline;
-    cursor: pointer;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .w-80 {
-    width: 80%;
+  width: 80%;
 }

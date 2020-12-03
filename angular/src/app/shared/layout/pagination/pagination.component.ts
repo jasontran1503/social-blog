@@ -1,13 +1,19 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import { Page } from '../../enum/page.enum';
 
 @Component({
   selector: 'app-pagination',
   templateUrl: './pagination.component.html',
-  styleUrls: ['./pagination.component.css']
+  styleUrls: ['./pagination.component.css'],
 })
 export class PaginationComponent implements OnInit, OnChanges {
-
   @Input() postsCount: number;
   @Input() currentPage: number;
   @Output() choosePage = new EventEmitter<number>();
@@ -20,8 +26,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     this.pagesCount = Math.ceil(this.postsCount / Page.PAGE_SIZE);
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   pages(i: number) {
     return new Array(i);
@@ -49,5 +54,4 @@ export class PaginationComponent implements OnInit, OnChanges {
     }
     this.changePage.emit(this.currentPage);
   }
-
 }

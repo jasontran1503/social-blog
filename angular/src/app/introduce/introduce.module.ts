@@ -10,24 +10,45 @@ import { ContactComponent } from './contact/contact.component';
 
 const routes: Routes = [
   {
-    path: '', component: IntroduceComponent,
+    path: '',
+    component: IntroduceComponent,
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', component: HomeComponent, data: { animation: 'home' } },
-      { path: 'about-me', component: AboutMeComponent, data: { animation: 'about-me' } },
-      { path: 'skills', component: SkillsComponent, data: { animation: 'skills' } },
-      { path: 'experience', component: ExperienceComponent, data: { animation: 'experience' } },
-      { path: 'contact', component: ContactComponent, data: { animation: 'contact' } },
-    ]
-  }
+      {
+        path: 'about-me',
+        component: AboutMeComponent,
+        data: { animation: 'about-me' },
+      },
+      {
+        path: 'skills',
+        component: SkillsComponent,
+        data: { animation: 'skills' },
+      },
+      {
+        path: 'experience',
+        component: ExperienceComponent,
+        data: { animation: 'experience' },
+      },
+      {
+        path: 'contact',
+        component: ContactComponent,
+        data: { animation: 'contact' },
+      },
+    ],
+  },
 ];
 
 @NgModule({
-  declarations: [IntroduceComponent, HomeComponent, AboutMeComponent, SkillsComponent, ExperienceComponent, ContactComponent],
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes)
+  declarations: [
+    IntroduceComponent,
+    HomeComponent,
+    AboutMeComponent,
+    SkillsComponent,
+    ExperienceComponent,
+    ContactComponent,
   ],
-  exports: [RouterModule]
+  imports: [CommonModule, RouterModule.forChild(routes)],
+  exports: [RouterModule],
 })
 export class IntroduceModule { }

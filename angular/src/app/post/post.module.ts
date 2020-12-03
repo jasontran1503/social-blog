@@ -28,7 +28,8 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     PostSearchComponent,
     PostContentComponent,
     CommentComponent,
-    EditCommentComponent],
+    EditCommentComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -36,7 +37,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     AngularEditorModule,
     LayoutModule,
     EditorModule,
-    PostRoutingModule
+    PostRoutingModule,
   ],
   exports: [
     PostDetailPageComponent,
@@ -48,6 +49,7 @@ import { EditorModule } from '@tinymce/tinymce-angular';
     PostSearchComponent,
     PostContentComponent,
     CommentComponent,
-    EditCommentComponent]
+    EditCommentComponent,
+  ],
 })
 export class PostModule { }

@@ -8,17 +8,19 @@ import { UserService } from '../../services/user.service';
 @Component({
   selector: 'app-follow-button',
   templateUrl: './follow-button.component.html',
-  styleUrls: ['./follow-button.component.css']
+  styleUrls: ['./follow-button.component.css'],
 })
 export class FollowButtonComponent implements OnInit, OnDestroy {
-
   @Input() user: User;
   isFollow: boolean;
   isDisplay: boolean;
   listFollowing: string[];
   destroy$ = new Subject();
 
-  constructor(private userService: UserService, private authService: AuthService) { }
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) { }
 
   ngOnInit(): void {
     // Get current user
@@ -61,7 +63,7 @@ export class FollowButtonComponent implements OnInit, OnDestroy {
       this.checkFollowStatus(this.listFollowing, this.user._id);
       this.followUser();
     } else {
-      const index = this.listFollowing.findIndex(x => x === this.user._id);
+      const index = this.listFollowing.findIndex((x) => x === this.user._id);
       this.listFollowing.splice(index, 1);
       this.checkFollowStatus(this.listFollowing, this.user._id);
       this.unfollowUser();
@@ -72,7 +74,8 @@ export class FollowButtonComponent implements OnInit, OnDestroy {
    * Follow user
    */
   followUser() {
-    this.userService.followUser(this.user.username)
+    this.userService
+      .followUser(this.user.username)
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }
@@ -81,7 +84,8 @@ export class FollowButtonComponent implements OnInit, OnDestroy {
    * Unfollow user
    */
   unfollowUser() {
-    this.userService.unfollowUser(this.user.username)
+    this.userService
+      .unfollowUser(this.user.username)
       .pipe(takeUntil(this.destroy$))
       .subscribe();
   }
@@ -90,5 +94,4 @@ export class FollowButtonComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

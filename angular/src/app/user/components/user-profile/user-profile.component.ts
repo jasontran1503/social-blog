@@ -1,4 +1,12 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import * as moment from 'moment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
@@ -10,10 +18,9 @@ import { AuthService } from 'src/app/shared/services/auth.service';
 @Component({
   selector: 'app-user-profile',
   templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.css']
+  styleUrls: ['./user-profile.component.css'],
 })
 export class UserProfileComponent implements OnInit {
-
   @Input() user: User;
   @Output() uploadAvatar = new EventEmitter();
   @ViewChild('uploadModal', { static: true }) uploadModal: ElementRef;
@@ -72,7 +79,9 @@ export class UserProfileComponent implements OnInit {
       this.toast.showToastError('Không có ảnh nào được chọn');
     } else if (this.avatarFile.size > maxSize) {
       this.toast.showToastError('Ảnh tải lên không quá 1MB');
-    } else if (!this.avatarFile.name.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+    } else if (
+      !this.avatarFile.name.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)
+    ) {
       this.toast.showToastError('Ảnh tải lên không đúng định dạng');
     } else {
       const reader = new FileReader();
@@ -98,5 +107,4 @@ export class UserProfileComponent implements OnInit {
     this.modalRef.hide();
     this.avatarUrl = null;
   }
-
 }

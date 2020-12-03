@@ -7,10 +7,9 @@ import { PostService } from '../../services/post.service';
 @Component({
   selector: 'app-users-helper',
   templateUrl: './users-helper.component.html',
-  styleUrls: ['./users-helper.component.css']
+  styleUrls: ['./users-helper.component.css'],
 })
 export class UsersHelperComponent implements OnInit {
-
   @Input() listUser: User[];
   @Output() closeModal = new EventEmitter();
   destroy$ = new Subject();
@@ -18,14 +17,13 @@ export class UsersHelperComponent implements OnInit {
   constructor(
     private postService: PostService,
     private router: Router,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute
+  ) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   navigateToUserPage(username: string) {
     this.router.navigate(['/', 'user', username]);
     this.closeModal.emit();
   }
-
 }

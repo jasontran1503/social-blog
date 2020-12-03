@@ -2,17 +2,18 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Folder } from 'src/app/shared/enum/image-folder';
 import { Page } from 'src/app/shared/enum/page.enum';
 import { DataResponse } from 'src/app/shared/models/data-response';
+import { ShareService } from 'src/app/shared/services/share.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-user-summary-page',
   templateUrl: './user-summary-page.component.html',
-  styleUrls: ['./user-summary-page.component.css']
+  styleUrls: ['./user-summary-page.component.css'],
 })
 export class UserSummaryPageComponent implements OnInit, OnDestroy {
-
   username: string;
   user$: Observable<DataResponse>;
   post$: Observable<DataResponse>;
@@ -25,7 +26,9 @@ export class UserSummaryPageComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private userService: UserService) {
+    private userService: UserService,
+    private shareService: ShareService
+  ) {
     this.route.params
       .pipe(takeUntil(this.destroy$))
       .subscribe((params: Params) => {
@@ -70,7 +73,8 @@ export class UserSummaryPageComponent implements OnInit, OnDestroy {
    * @param avatar image file
    */
   uploadAvatar(avatar: File) {
-    this.userService.uploadAvatar(avatar)
+    this.shareService
+      .uploadImage(avatar, Folder.AVATAR)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response) => {
         if (response && response.data) {
@@ -116,5 +120,4 @@ export class UserSummaryPageComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

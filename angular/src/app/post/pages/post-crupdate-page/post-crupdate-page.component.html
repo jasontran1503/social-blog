@@ -1,17 +1,26 @@
 <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <textarea class="form form-title" placeholder="Tiêu đề..." formControlName="title"></textarea>
-    <div class="text-error mb-3" *ngIf="(submitted || f.title.touched) && f.title.errors">
-        <small *ngIf="f.title.errors?.required">
-            Bạn chưa nhập tiêu đề</small>
-        <small *ngIf="f.title.errors?.maxlength">
-            Tiêu đề không quá 128 kí tự</small>
-    </div>
+  <textarea
+    class="form form-title"
+    placeholder="Tiêu đề..."
+    formControlName="title"
+  ></textarea>
+  <div
+    class="text-error mb-3"
+    *ngIf="(submitted || f.title.touched) && f.title.errors"
+  >
+    <small *ngIf="f.title.errors?.required"> Bạn chưa nhập tiêu đề</small>
+    <small *ngIf="f.title.errors?.maxlength">
+      Tiêu đề không quá 128 kí tự</small
+    >
+  </div>
 
-    <editor formControlName="content" [init]="tinymceinit"></editor>
-    <div class="text-error" *ngIf="(submitted || f.content.touched) && f.content.errors">
-        <small *ngIf="f.content.errors?.required">
-            Bạn chưa nhập nội dung</small>
-    </div>
+  <editor formControlName="content" [init]="tinymceinit"></editor>
+  <div
+    class="text-error"
+    *ngIf="(submitted || f.content.touched) && f.content.errors"
+  >
+    <small *ngIf="f.content.errors?.required"> Bạn chưa nhập nội dung</small>
+  </div>
 
-    <button type="submit" class="btn-color float-right mt-2">Lưu</button>
+  <button type="submit" class="btn-color float-right mt-2">Lưu</button>
 </form>

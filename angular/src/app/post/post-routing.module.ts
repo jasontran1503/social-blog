@@ -8,18 +8,27 @@ import { PostComponent } from './post.component';
 
 const routes: Routes = [
   {
-    path: '', component: PostComponent,
+    path: '',
+    component: PostComponent,
     children: [
       { path: '', component: PostListPageComponent },
       { path: 'detail/:slug', component: PostDetailPageComponent },
-      { path: 'create', component: PostCrupdatePageComponent, canActivate: [AuthGuard] },
-      { path: 'update/:slug', component: PostCrupdatePageComponent, canActivate: [AuthGuard] }
-    ]
-  }
+      {
+        path: 'create',
+        component: PostCrupdatePageComponent,
+        canActivate: [AuthGuard],
+      },
+      {
+        path: 'update/:slug',
+        component: PostCrupdatePageComponent,
+        canActivate: [AuthGuard],
+      },
+    ],
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class PostRoutingModule { }

@@ -8,10 +8,9 @@ const postUrl = 'post';
 const userUrl = 'user';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
-
   username$: BehaviorSubject<string>;
   usernameSubject: Observable<string>;
 
@@ -27,7 +26,9 @@ export class UserService {
    */
   getPostByUser(username: string, page): Observable<DataResponse> {
     const params = { username, page };
-    return this.http.get<DataResponse>(`${url}${postUrl}/${userUrl}`, { params });
+    return this.http.get<DataResponse>(`${url}${postUrl}/${userUrl}`, {
+      params,
+    });
   }
 
   /**
@@ -63,7 +64,9 @@ export class UserService {
    */
   getUserFollowers(username: string): Observable<DataResponse> {
     const params = { username };
-    return this.http.get<DataResponse>(`${url}${userUrl}/followers`, { params });
+    return this.http.get<DataResponse>(`${url}${userUrl}/followers`, {
+      params,
+    });
   }
 
   /**
@@ -72,13 +75,19 @@ export class UserService {
    */
   getUserFollowing(username: string): Observable<DataResponse> {
     const params = { username };
-    return this.http.get<DataResponse>(`${url}${userUrl}/following`, { params });
+    return this.http.get<DataResponse>(`${url}${userUrl}/following`, {
+      params,
+    });
   }
 
-  uploadAvatar(avatar: File) {
-    const formData = new FormData();
-    formData.append('avatar', avatar, avatar.name);
-    return this.http.post<DataResponse>(`${url}${userUrl}/upload-to-cloud`, formData);
+  /**
+   * Search user
+   * @param username username
+   */
+  searchUser(username: string) {
+    const params = { username };
+    return this.http.get<DataResponse>(`${url}${userUrl}/search`, {
+      params,
+    });
   }
-
 }

@@ -3,19 +3,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Folder } from 'src/app/shared/enum/image-folder';
 import { DataResponse } from 'src/app/shared/models/data-response';
 import { Post } from 'src/app/shared/models/post';
 import { DialogsService } from 'src/app/shared/notification/dialogs/dialogs.service';
 import { ToastMessageService } from 'src/app/shared/notification/toast-message/toast-message.service';
 import { PostService } from 'src/app/shared/services/post.service';
+import { ShareService } from 'src/app/shared/services/share.service';
 
 @Component({
   selector: 'app-post-crupdate-page',
   templateUrl: './post-crupdate-page.component.html',
-  styleUrls: ['./post-crupdate-page.component.css']
+  styleUrls: ['./post-crupdate-page.component.css'],
 })
 export class PostCrupdatePageComponent implements OnInit, OnDestroy {
-
   formGroup: FormGroup;
   slug: string;
   post: Post;
@@ -33,12 +34,17 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
       input.setAttribute('accept', 'image/*');
       input.onchange = () => {
         const file = input.files[0];
-
-        const reader = new FileReader();
-        reader.onload = (e) => {
-          callback(e.target.result, {});
-        };
-        reader.readAsDataURL(file);
+        this.checkImage(file);
+        this.shareService
+          .uploadImage(file, Folder.IMAGE_POST)
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((response: DataResponse) => {
+            const reader = new FileReader();
+            reader.onload = () => {
+              callback(response.data, {});
+            };
+            reader.readAsDataURL(file);
+          });
       };
       input.click();
     },
@@ -48,13 +54,13 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
       'advlist autolink lists link image charmap preview hr anchor pagebreak',
       'searchreplace wordcount visualblocks visualchars code fullscreen',
       'insertdatetime nonbreaking save table directionality',
-      'emoticons template paste textpattern autoresize'
+      'emoticons template paste textpattern autoresize',
     ],
     toolbar1:
       'undo redo | formatselect | bold italic backcolor | \
             alignleft aligncenter alignright alignjustify | \
             bullist numlist outdent indent | removeformat | preview',
-    toolbar2: 'forecolor backcolor emoticons'
+    toolbar2: 'forecolor backcolor emoticons',
   };
 
   destroy$ = new Subject();
@@ -64,8 +70,10 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router,
     private postService: PostService,
+    private shareService: ShareService,
     private dialog: DialogsService,
-    private toast: ToastMessageService) {
+    private toast: ToastMessageService
+  ) {
     // Get slug
     this.route.params
       .pipe(takeUntil(this.destroy$))
@@ -82,12 +90,27 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
   }
 
   /**
+   * Check image
+   * @param image image file
+   */
+  checkImage(image: File) {
+    const maxSize = 1 * 1024 * 1024;
+    if (!image) {
+      this.toast.showToastError('Không có ảnh nào được chọn');
+    } else if (image.size > maxSize) {
+      this.toast.showToastError('Ảnh tải lên không quá 1MB');
+    } else if (!image.name.match(/\.(jpg|JPG|jpeg|JPEG|png|PNG|gif|GIF)$/)) {
+      this.toast.showToastError('Ảnh tải lên không đúng định dạng');
+    }
+  }
+
+  /**
    * Build form
    */
   buildForm() {
     return this.fb.group({
       title: ['', [Validators.required, Validators.maxLength(128)]],
-      content: ['', Validators.required]
+      content: ['', Validators.required],
     });
   }
 
@@ -98,7 +121,7 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
   patchDataForm(post: Post) {
     this.formGroup.patchValue({
       title: post.title,
-      content: post.content
+      content: post.content,
     });
   }
 
@@ -110,7 +133,8 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
    * Get post detail
    */
   getPostDetail() {
-    this.postService.getPostDetail(this.slug)
+    this.postService
+      .getPostDetail(this.slug)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: DataResponse) => {
         if (response && response.success) {
@@ -126,7 +150,8 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
    * @param content post's content
    */
   createPost(title: string, content: string) {
-    this.postService.createPost(title, content)
+    this.postService
+      .createPost(title, content)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: DataResponse) => {
         if (response && response.success) {
@@ -144,7 +169,8 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
    * @param slug post's slug
    */
   updatePost(title: string, content: string, slug: string) {
-    this.postService.updatePost(title, content, this.slug)
+    this.postService
+      .updatePost(title, content, this.slug)
       .pipe(takeUntil(this.destroy$))
       .subscribe((response: DataResponse) => {
         if (response && response.success) {
@@ -165,7 +191,9 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
     }
     const { title, content } = this.formGroup.value;
 
-    const result = await this.dialog.showConfirmDialog('Bạn có chắc muốn lưu bài viết?').toPromise();
+    const result = await this.dialog
+      .showConfirmDialog('Bạn có chắc muốn lưu bài viết?')
+      .toPromise();
     if (result) {
       if (this.slug) {
         this.updatePost(title, content, this.slug);
@@ -179,5 +207,4 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
     this.destroy$.next();
     this.destroy$.complete();
   }
-
 }

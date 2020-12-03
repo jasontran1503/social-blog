@@ -11,12 +11,12 @@ import { PostService } from '../../services/post.service';
 @Component({
   selector: 'app-favorite-button',
   templateUrl: './favorite-button.component.html',
-  styleUrls: ['./favorite-button.component.css']
+  styleUrls: ['./favorite-button.component.css'],
 })
 export class FavoriteButtonComponent implements OnInit {
-
   @Input() post: Post;
-  @ViewChild('templateListFavorite', { static: true }) templateListFavorite: ElementRef;
+  @ViewChild('templateListFavorite', { static: true })
+  templateListFavorite: ElementRef;
   isFavorite: boolean;
   favoritesCount: number;
   public modalRef: BsModalRef;
@@ -26,7 +26,8 @@ export class FavoriteButtonComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private postService: PostService,
-    private modalService: BsModalService) { }
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit(): void {
     this.favoritesCount = this.post.favorites.length;
@@ -44,16 +45,20 @@ export class FavoriteButtonComponent implements OnInit {
    * Favorite post
    */
   favorite() {
-    this.postService.favorite(this.post.slug)
-      .pipe(takeUntil(this.destroy$)).subscribe();
+    this.postService
+      .favorite(this.post.slug)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   /**
    * Unfavorite post
    */
   unfavorite() {
-    this.postService.unfavorite(this.post.slug)
-      .pipe(takeUntil(this.destroy$)).subscribe();
+    this.postService
+      .unfavorite(this.post.slug)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe();
   }
 
   /**
@@ -87,7 +92,7 @@ export class FavoriteButtonComponent implements OnInit {
   showListFavorite() {
     this.modalRef = this.modalService.show(this.templateListFavorite, {
       // initialState,
-      class: 'modal-dialog-centered'
+      class: 'modal-dialog-centered',
     });
     this.getListFavorite();
   }
@@ -99,5 +104,4 @@ export class FavoriteButtonComponent implements OnInit {
   getListFavorite() {
     this.listFavorite$ = this.postService.getListFavorite(this.post.slug);
   }
-
 }

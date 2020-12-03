@@ -5,10 +5,9 @@ import { BehaviorSubject } from 'rxjs';
 @Component({
   selector: 'app-confirm-dialog',
   templateUrl: './confirm-dialog.component.html',
-  styleUrls: ['./confirm-dialog.component.css']
+  styleUrls: ['./confirm-dialog.component.css'],
 })
 export class ConfirmDialogComponent implements OnInit {
-
   @Input() message: string;
 
   public confirmClick = new BehaviorSubject<boolean>(false);
@@ -28,5 +27,4 @@ export class ConfirmDialogComponent implements OnInit {
     this.confirmClick.complete();
     this.modalClose.hide();
   }
-
 }

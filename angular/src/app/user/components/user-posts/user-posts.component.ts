@@ -6,16 +6,14 @@ import { Post } from 'src/app/shared/models/post';
 @Component({
   selector: 'app-user-posts',
   templateUrl: './user-posts.component.html',
-  styleUrls: ['./user-posts.component.css']
+  styleUrls: ['./user-posts.component.css'],
 })
 export class UserPostsComponent implements OnInit {
-
   @Input() posts: Post[];
 
   constructor(private route: ActivatedRoute, private router: Router) { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
   /**
    * Format date
@@ -24,5 +22,4 @@ export class UserPostsComponent implements OnInit {
   formatDate(date: Date) {
     return moment(date).format('DD/MM/YYYY hh:mm:ss');
   }
-
 }
