@@ -1,0 +1,40 @@
+<div class="chat-home">
+  <div class="chat-title">
+    <img
+      class="chat-avatar"
+      src="https://static.productionready.io/images/smiley-cyrus.jpg"
+    />
+    <span class="chat-username">jasontran</span>
+  </div>
+  <ul>
+    <li>
+      <div class="chat-message chat-message-left">
+        <div class="chat-user">
+          <img
+            class="chat-avatar"
+            src="https://static.productionready.io/images/smiley-cyrus.jpg"
+          />
+          <span class="chat-username">jasontran</span>
+        </div>
+        <p class="chat-message-content">Lorem ipsum dolor sit amet consectet</p>
+      </div>
+    </li>
+    <li>
+      <div class="chat-message chat-message-right">
+        Lorem ipsum dolor sit amet consectetur adipisicin
+      </div>
+    </li>
+  </ul>
+  <div class="chat-input">
+    <input
+      type="text"
+      class="form-control"
+      (keyup.enter)="addMessage()"
+      [value]="message"
+      (input)="message = $event.target.value"
+    />
+    <button class="btn" type="button" (click)="addMessage()">
+      <i class="fa fa-paper-plane"></i>
+    </button>
+  </div>
+</div>
