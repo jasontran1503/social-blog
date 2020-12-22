@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
+import { User } from 'src/app/shared/models/user';
 import { DataResponse } from '../models/data-response';
-import { User } from '../models/user';
 
 const url = 'http://localhost:3000/api/auth/';
 
@@ -11,7 +11,6 @@ const url = 'http://localhost:3000/api/auth/';
   providedIn: 'root',
 })
 export class AuthService {
-  token: string;
   private currentUserSubject: BehaviorSubject<User>;
   public currentUser: Observable<User>;
 
@@ -21,29 +20,21 @@ export class AuthService {
   }
 
   /**
-   * Get token
-   */
-  getToken(): string {
-    return this.token;
-  }
-
-  /**
    * Check authentication
    */
-  isAuthenticated(): Observable<DataResponse> {
-    return this.http.get<DataResponse>(url + 'is-auth');
+  isAuthenticated(): Observable<DataResponse<boolean>> {
+    return this.http.get<DataResponse<boolean>>(url + 'is-auth');
   }
 
   /**
    * Get current user
    */
-  getCurrentUser(): Observable<DataResponse> {
-    return this.http.get<DataResponse>(url + 'user').pipe(
-      map((response: DataResponse) => {
+  getCurrentUser(): Observable<DataResponse<User>> {
+    return this.http.get<DataResponse<User>>(url + 'user').pipe(
+      tap((response: DataResponse<User>) => {
         if (response.success) {
           this.currentUserSubject.next(response.data);
         }
-
         return response;
       })
     );
@@ -53,31 +44,38 @@ export class AuthService {
    * Login
    * @param body email & password
    */
-  login(body: { email: string; password: string }): Observable<any> {
-    return this.http.post<DataResponse>(url + 'login', body);
+  login(body: {
+    email: string;
+    password: string;
+  }): Observable<DataResponse<string>> {
+    return this.http.post<DataResponse<string>>(url + 'login', body);
   }
 
   /**
    * Register
    * @param body email, password & username
    */
-  register(body: { email: string; password: string; username: string }) {
-    return this.http.post<DataResponse>(url + 'register', body);
+  register(body: {
+    email: string;
+    password: string;
+    username: string;
+  }): Observable<DataResponse<User>> {
+    return this.http.post<DataResponse<User>>(url + 'register', body);
   }
 
   /**
    * Logout
    */
-  logout() {
+  logout(): Observable<DataResponse<any>> {
     this.currentUserSubject.next(null);
-    return this.http.post<DataResponse>(url + 'logout', null);
+    return this.http.post<DataResponse<any>>(url + 'logout', null);
   }
 
   /**
    * Send mail when register success
    * @param email email
    */
-  sendMail(email: string) {
-    return this.http.post<DataResponse>(url + 'send-mail', { email });
+  sendMail(email: string): Observable<DataResponse<any>> {
+    return this.http.post<DataResponse<any>>(url + 'send-mail', { email });
   }
 }

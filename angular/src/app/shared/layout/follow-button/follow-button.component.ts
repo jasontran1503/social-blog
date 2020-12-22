@@ -20,7 +20,7 @@ export class FollowButtonComponent implements OnInit, OnDestroy {
   constructor(
     private userService: UserService,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     // Get current user
@@ -34,7 +34,7 @@ export class FollowButtonComponent implements OnInit, OnDestroy {
           } else {
             this.isDisplay = true;
           }
-          this.listFollowing = response.following;
+          this.listFollowing = response.following as string[];
           this.checkFollowStatus(this.listFollowing, this.user._id);
         }
       });

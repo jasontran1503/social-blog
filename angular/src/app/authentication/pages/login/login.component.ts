@@ -62,9 +62,8 @@ export class LoginComponent implements OnInit, OnDestroy {
     this.authService
       .login(formValue)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<string>) => {
         if (response && response.success) {
-          this.authService.token = response.data;
           this.router.navigate(['/', 'post']);
         }
       });

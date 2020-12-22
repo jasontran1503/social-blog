@@ -20,7 +20,7 @@ export class FavoriteButtonComponent implements OnInit {
   isFavorite: boolean;
   favoritesCount: number;
   public modalRef: BsModalRef;
-  listFavorite$: Observable<DataResponse>;
+  listFavorite$: Observable<DataResponse<User[]>>;
   destroy$ = new Subject();
 
   constructor(

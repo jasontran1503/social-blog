@@ -6,7 +6,7 @@ export interface User {
   createdAt?: Date;
   updatedAt?: Date;
   _id: string;
-  followers: string[];
-  following: string[];
+  followers: string[] | User[];
+  following: string[] | User[];
   avatar: string;
 }

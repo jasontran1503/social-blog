@@ -38,7 +38,7 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
         this.shareService
           .uploadImage(file, Folder.IMAGE_POST)
           .pipe(takeUntil(this.destroy$))
-          .subscribe((response: DataResponse) => {
+          .subscribe((response: DataResponse<string>) => {
             const reader = new FileReader();
             reader.onload = () => {
               callback(response.data, {});
@@ -136,7 +136,7 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
     this.postService
       .getPostDetail(this.slug)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<Post>) => {
         if (response && response.success) {
           this.post = response.data;
           this.patchDataForm(this.post);
@@ -153,7 +153,7 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
     this.postService
       .createPost(title, content)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<Post>) => {
         if (response && response.success) {
           this.toast.showToastSuccess(response.message);
           const slug = response.data.slug;
@@ -172,7 +172,7 @@ export class PostCrupdatePageComponent implements OnInit, OnDestroy {
     this.postService
       .updatePost(title, content, this.slug)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<Post>) => {
         if (response && response.success) {
           this.toast.showToastSuccess(response.message);
           this.router.navigate(['/post', 'detail', slug]);

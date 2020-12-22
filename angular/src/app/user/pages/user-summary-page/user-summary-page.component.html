@@ -26,7 +26,7 @@
 </div>
 <!-- Post -->
 <div *ngIf="userRouteNumber === 1">
-  <ng-container *ngIf="post$ | async as post">
+  <ng-container *ngIf="posts$ | async as post">
     <app-user-posts [posts]="post.data.posts"></app-user-posts>
     <div *ngIf="post.data.postsCount > 0">
       <app-pagination

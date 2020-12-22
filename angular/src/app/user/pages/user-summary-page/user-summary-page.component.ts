@@ -1,3 +1,5 @@
+import { Post } from 'src/app/shared/models/post';
+import { User } from 'src/app/shared/models/user';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
@@ -15,10 +17,10 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class UserSummaryPageComponent implements OnInit, OnDestroy {
   username: string;
-  user$: Observable<DataResponse>;
-  post$: Observable<DataResponse>;
-  listFollowers$: Observable<DataResponse>;
-  listFollowing$: Observable<DataResponse>;
+  user$: Observable<DataResponse<User>>;
+  posts$: Observable<DataResponse<any>>;
+  listFollowers$: Observable<DataResponse<User[]>>;
+  listFollowing$: Observable<DataResponse<User[]>>;
   page = Page.PAGE_NUMBER;
   userRouteNumber = 1;
 
@@ -57,7 +59,7 @@ export class UserSummaryPageComponent implements OnInit, OnDestroy {
    * @param page page
    */
   getPostByUser(username: string, page: number) {
-    this.post$ = this.userService.getPostByUser(username, page);
+    this.posts$ = this.userService.getPostByUser(username, page);
   }
 
   /**

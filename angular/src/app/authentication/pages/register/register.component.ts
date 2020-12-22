@@ -1,3 +1,4 @@
+import { User } from 'src/app/shared/models/user';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -23,7 +24,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private router: Router,
     private toast: ToastMessageService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.formGroup = this.buildForm();
@@ -79,7 +80,7 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService
       .register(formValue)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<User>) => {
         if (response && response.success) {
           this.toast.showToastSuccess(response.message);
           const loginValue = {
@@ -102,9 +103,8 @@ export class RegisterComponent implements OnInit, OnDestroy {
     this.authService
       .login(loginValue)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<string>) => {
         if (response && response.success) {
-          this.authService.token = response.data;
           this.router.navigate(['/', 'post']);
         }
       });

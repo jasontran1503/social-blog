@@ -22,7 +22,7 @@ export class HeaderComponent implements OnInit {
   @ViewChild('searchModal', { static: true }) searchModal: ElementRef;
   userSearch = new FormControl('');
   public modalRef: BsModalRef;
-  listSearch$: Observable<DataResponse>;
+  listSearch$: Observable<DataResponse<User[]>>;
 
   constructor(
     private authService: AuthService,
@@ -54,7 +54,7 @@ export class HeaderComponent implements OnInit {
       .showConfirmDialog('Bạn có chắc chắn muốn đăng xuất?')
       .toPromise();
     if (result) {
-      this.authService.logout().subscribe((response: DataResponse) => {
+      this.authService.logout().subscribe((response: DataResponse<any>) => {
         if (response && response.success) {
           this.toast.showToastSuccess(response.message);
           this.router.navigate(['/']);
@@ -67,12 +67,14 @@ export class HeaderComponent implements OnInit {
    * Check authentication
    */
   isAuthenticated() {
-    this.authService.isAuthenticated().subscribe((response: DataResponse) => {
-      this.isAuth = response.data;
-      if (this.isAuth) {
-        this.authService.getCurrentUser().subscribe();
-      }
-    });
+    this.authService
+      .isAuthenticated()
+      .subscribe((response: DataResponse<boolean>) => {
+        this.isAuth = response.data;
+        if (this.isAuth) {
+          this.authService.getCurrentUser().subscribe();
+        }
+      });
   }
 
   /**

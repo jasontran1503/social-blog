@@ -12,12 +12,9 @@ import { PostService } from '../../services/post.service';
 export class UsersHelperComponent implements OnInit {
   @Input() listUser: User[];
   @Output() closeModal = new EventEmitter();
-  destroy$ = new Subject();
 
   constructor(
-    private postService: PostService,
-    private router: Router,
-    private route: ActivatedRoute
+    private router: Router
   ) { }
 
   ngOnInit(): void { }

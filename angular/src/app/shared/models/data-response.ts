@@ -1,5 +1,5 @@
-export interface DataResponse {
+export interface DataResponse<T> {
   success: boolean;
   message: string;
-  data?: any;
+  data?: T;
 }

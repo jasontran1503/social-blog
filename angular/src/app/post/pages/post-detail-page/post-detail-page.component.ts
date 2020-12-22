@@ -1,3 +1,4 @@
+import { Post } from 'src/app/shared/models/post';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -17,7 +18,7 @@ import { EditCommentComponent } from '../../components/edit-comment/edit-comment
   styleUrls: ['./post-detail-page.component.css'],
 })
 export class PostDetailPageComponent implements OnInit, OnDestroy {
-  post$: Observable<DataResponse>;
+  post$: Observable<DataResponse<Post>>;
   slug: string;
   modalRef: BsModalRef;
   currentUsername: string;
@@ -67,7 +68,7 @@ export class PostDetailPageComponent implements OnInit, OnDestroy {
     this.postService
       .deletePost(slug)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<any>) => {
         if (response && response.success) {
           this.toast.showToastSuccess(response.message);
           this.router.navigate(['/post']);
@@ -83,7 +84,7 @@ export class PostDetailPageComponent implements OnInit, OnDestroy {
     this.postService
       .createComment(content, this.slug)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<any>) => {
         if (response && response.success) {
           this.getPostDetail();
         }
@@ -99,7 +100,7 @@ export class PostDetailPageComponent implements OnInit, OnDestroy {
     this.postService
       .updateComment(content, commentId)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<any>) => {
         if (response && response.success) {
           this.getPostDetail();
         }
@@ -131,7 +132,7 @@ export class PostDetailPageComponent implements OnInit, OnDestroy {
     this.postService
       .deleteComment(commentId)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<any>) => {
         if (response && response.success) {
           this.getPostDetail();
         }

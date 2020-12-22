@@ -19,7 +19,7 @@ export class PostListPageComponent implements OnInit, OnDestroy {
 
   destroy$ = new Subject();
 
-  constructor(private postService: PostService) { }
+  constructor(private postService: PostService) {}
 
   ngOnInit(): void {
     // Default page: 1
@@ -35,7 +35,7 @@ export class PostListPageComponent implements OnInit, OnDestroy {
     this.postService
       .getAllPost(page)
       .pipe(takeUntil(this.destroy$))
-      .subscribe((response: DataResponse) => {
+      .subscribe((response: DataResponse<any>) => {
         if (response && response.success) {
           this.posts = response.data.posts;
           this.postsCount = response.data.postsCount;

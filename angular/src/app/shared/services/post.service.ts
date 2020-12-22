@@ -1,7 +1,9 @@
+import { User } from 'src/app/shared/models/user';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { DataResponse } from '../models/data-response';
+import { Post } from '../models/post';
 
 const url = 'http://localhost:3000/api/';
 const postUrl = 'post';
@@ -11,24 +13,26 @@ const commentUrl = 'comment';
   providedIn: 'root',
 })
 export class PostService {
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {}
 
   /**
    * Get all post
    * @param page page number
    */
-  getAllPost(page): Observable<DataResponse> {
+  getAllPost(page): Observable<DataResponse<Post[]>> {
     const params = { page };
-    return this.http.get<DataResponse>(url + postUrl, { params });
+    return this.http.get<DataResponse<Post[]>>(url + postUrl, { params });
   }
 
   /**
    * Get post detail
    * @param slug post's slug
    */
-  getPostDetail(slug: string): Observable<DataResponse> {
+  getPostDetail(slug: string): Observable<DataResponse<Post>> {
     const params = { slug };
-    return this.http.get<DataResponse>(`${url}${postUrl}/detail`, { params });
+    return this.http.get<DataResponse<Post>>(`${url}${postUrl}/detail`, {
+      params,
+    });
   }
 
   /**
@@ -36,9 +40,9 @@ export class PostService {
    * @param title post's title
    * @param content post's content
    */
-  createPost(title: string, content: string): Observable<DataResponse> {
+  createPost(title: string, content: string): Observable<DataResponse<Post>> {
     const body = { title, content };
-    return this.http.post<DataResponse>(`${url}${postUrl}/create`, body);
+    return this.http.post<DataResponse<Post>>(`${url}${postUrl}/create`, body);
   }
 
   /**
@@ -51,10 +55,10 @@ export class PostService {
     title: string,
     content: string,
     slug: string
-  ): Observable<DataResponse> {
+  ): Observable<DataResponse<Post>> {
     const body = { title, content };
     const params = { slug };
-    return this.http.put<DataResponse>(`${url}${postUrl}/update`, body, {
+    return this.http.put<DataResponse<Post>>(`${url}${postUrl}/update`, body, {
       params,
     });
   }
@@ -63,9 +67,9 @@ export class PostService {
    * Delete post
    * @param slug post's slug
    */
-  deletePost(slug: string): Observable<DataResponse> {
+  deletePost(slug: string): Observable<DataResponse<any>> {
     const params = { slug };
-    return this.http.delete<DataResponse>(`${url}${postUrl}/delete`, {
+    return this.http.delete<DataResponse<any>>(`${url}${postUrl}/delete`, {
       params,
     });
   }
@@ -75,9 +79,12 @@ export class PostService {
    * @param content comment's content
    * @param slug post's slug
    */
-  createComment(content: string, slug: string): Observable<DataResponse> {
+  createComment(content: string, slug: string): Observable<DataResponse<any>> {
     const body = { content, slug };
-    return this.http.post<DataResponse>(`${url}${commentUrl}/create`, body);
+    return this.http.post<DataResponse<any>>(
+      `${url}${commentUrl}/create`,
+      body
+    );
   }
 
   /**
@@ -85,21 +92,28 @@ export class PostService {
    * @param content comment's content
    * @param commentId comment's id
    */
-  updateComment(content: string, commentId: string): Observable<DataResponse> {
+  updateComment(
+    content: string,
+    commentId: string
+  ): Observable<DataResponse<Comment>> {
     const body = { content };
     const params = { commentId };
-    return this.http.put<DataResponse>(`${url}${commentUrl}/update`, body, {
-      params,
-    });
+    return this.http.put<DataResponse<Comment>>(
+      `${url}${commentUrl}/update`,
+      body,
+      {
+        params,
+      }
+    );
   }
 
   /**
    * Delete comment
    * @param commentId comment's id
    */
-  deleteComment(commentId: string): Observable<DataResponse> {
+  deleteComment(commentId: string): Observable<DataResponse<any>> {
     const params = { commentId };
-    return this.http.delete<DataResponse>(`${url}${commentUrl}/delete`, {
+    return this.http.delete<DataResponse<any>>(`${url}${commentUrl}/delete`, {
       params,
     });
   }
@@ -108,27 +122,30 @@ export class PostService {
    * Favorite post
    * @param slug post's slug
    */
-  favorite(slug: string): Observable<DataResponse> {
+  favorite(slug: string): Observable<DataResponse<any>> {
     const body = { slug };
-    return this.http.post<DataResponse>(`${url}${postUrl}/favorite`, body);
+    return this.http.post<DataResponse<any>>(`${url}${postUrl}/favorite`, body);
   }
 
   /**
    * Unfavorite post
    * @param slug post's slug
    */
-  unfavorite(slug: string): Observable<DataResponse> {
+  unfavorite(slug: string): Observable<DataResponse<any>> {
     const body = { slug };
-    return this.http.post<DataResponse>(`${url}${postUrl}/unfavorite`, body);
+    return this.http.post<DataResponse<any>>(
+      `${url}${postUrl}/unfavorite`,
+      body
+    );
   }
 
   /**
    * Get list favorite post
    * @param slug post's slug
    */
-  getListFavorite(slug: string): Observable<DataResponse> {
+  getListFavorite(slug: string): Observable<DataResponse<User[]>> {
     const params = { slug };
-    return this.http.get<DataResponse>(`${url}${postUrl}/favorites`, {
+    return this.http.get<DataResponse<User[]>>(`${url}${postUrl}/favorites`, {
       params,
     });
   }

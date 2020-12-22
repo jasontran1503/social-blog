@@ -32,7 +32,7 @@ export class AuthGuard
     | boolean
     | UrlTree {
     return this.authService.isAuthenticated().pipe(
-      map((response: DataResponse) => {
+      map((response: DataResponse<boolean>) => {
         if (response.data) {
           return true;
         }
