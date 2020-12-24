@@ -7,12 +7,3 @@
 >
 </ngx-spinner>
 <router-outlet></router-outlet>
-<div class="chat-box" *ngIf="displayButtonChat">
-  <button class="btn-chat-box" (click)="openChatBox()">
-    <i
-      class="fa"
-      [ngClass]="!toggleDisplayChat ? 'fa-pencil-square-o' : 'fa-times'"
-    ></i>
-  </button>
-</div>
-<div #chatComponent></div>
